@@ -15,6 +15,8 @@ public class MyStoreSteps {
     private WebDriver driver;
     private MyAddressesPage myAddressesPage;
     private String alias, address, city, postalCode, phoneNumber;
+    private ProductPage productPage;
+    private NewAddressPage newAddressPage;
 
     @Given("I'm on mystore main page")
     public void imOnMyStoreMainPage() {
@@ -22,6 +24,9 @@ public class MyStoreSteps {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://mystore-testlab.coderslab.pl");
+
+        productPage = new ProductPage(driver);
+
     }
 
     @When("I click sign in")
@@ -51,7 +56,7 @@ public class MyStoreSteps {
         driver.findElement(By.xpath("//button[@data-link-action='save-customer']")).click();
     }
 
-    @And("I click on my name")
+    @When("I click on my name")
     public void iClickOnMyName() {
         driver.findElement(By.xpath("//a[@title='View my customer account']")).click();
     }
@@ -69,7 +74,7 @@ public class MyStoreSteps {
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
 
-        NewAddressPage newAddressPage = new NewAddressPage(driver);
+        newAddressPage = new NewAddressPage(driver);
         newAddressPage.enterNewAddressData(alias, address, city, postalCode, phoneNumber);
     }
 
@@ -91,9 +96,29 @@ public class MyStoreSteps {
         Assertions.assertTrue(actualAddress.contains(phoneNumber), "Phone number not found");
     }
 
-    @And("I close the browser")
-    public void iCloseTheBrowser() {
-        driver.quit();
+    @When("I go to the main page")
+    public void iGoToTheMainPage() {
+        driver.findElement(By.className("logo")).click();
+    }
+
+    @Then("I click on Hummingbird printed sweater")
+    public void iClickOnHummingbirdPrintedSweater() {
+        driver.findElement(By.cssSelector("a[href$=size-s]")).click();
+    }
+
+    @And("I check if there is a discount")
+    public void iCheckIfThereIsADiscount() {
+        productPage.discountCheck();
+    }
+
+    @And("I choose size {string}")
+    public void iChooseSizeSize(String size) {
+        productPage.sizePick(size);
+    }
+
+    @And("I set quantity {int}")
+    public void iSetQuantityQuantity(int quantity) {
+        productPage.selectQuantity(quantity);
     }
 }
 
