@@ -17,6 +17,9 @@ public class MyStoreSteps {
     private String alias, address, city, postalCode, phoneNumber;
     private ProductPage productPage;
     private NewAddressPage newAddressPage;
+    private CartPage cartPage;
+    private OrderPage orderPage;
+
 
     @Given("I'm on mystore main page")
     public void imOnMyStoreMainPage() {
@@ -26,6 +29,7 @@ public class MyStoreSteps {
         driver.get("https://mystore-testlab.coderslab.pl");
 
         productPage = new ProductPage(driver);
+
 
     }
 
@@ -76,6 +80,7 @@ public class MyStoreSteps {
 
         newAddressPage = new NewAddressPage(driver);
         newAddressPage.enterNewAddressData(alias, address, city, postalCode, phoneNumber);
+        driver.findElement(By.xpath("//button[contains(@class, 'btn-primary')]")).click();
     }
 
     @Then("I can see new address")
@@ -119,6 +124,63 @@ public class MyStoreSteps {
     @And("I set quantity {int}")
     public void iSetQuantityQuantity(int quantity) {
         productPage.selectQuantity(quantity);
+
+    }
+
+    @Then("I add it to the cart")
+    public void iAddItToTheCart() {
+        cartPage = new CartPage(driver);
+        cartPage.cartBtn();
+    }
+
+    @And("I click on proceed to checkout")
+    public void iClickOnProceedToCheckout() {
+        driver.findElement(By.cssSelector("a[href$=order]")).click();
+    }
+
+    @Then("I delete the address")
+    public void iDeleteTheAddress() {
+        driver.findElement(By.className("delete-address")).click();
+    }
+
+    @And("I check if address is successfully deleted")
+    public void iCheckIfAddressIsSuccessfullyDeleted() {
+        myAddressesPage = new MyAddressesPage(driver);
+        Assertions.assertTrue(myAddressesPage.isAddressAlertVisible(), "The address was not successfully deleted");
+    }
+
+    @Then("^I enter new alias (.*) address (.*) city (.*) postal code (.*) phone (.*)$")
+    public void iAddNewAddress(String alias, String address, String city, String postalCode, String phoneNumber) {
+        this.alias = alias;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.phoneNumber = phoneNumber;
+
+        newAddressPage.enterNewAddressData(alias, address, city, postalCode, phoneNumber);
+        driver.findElement(By.name("confirm-addresses")).click();
+    }
+
+    @And("I choose pick up in-store")
+    public void iChoosePickUpInStore() {
+    }
+
+    @And("I choose pay by Check")
+    public void iChoosePayByCheck() {
+        cartPage.deliveryBtn();
+    }
+
+    @And("I place order")
+    public void iPlaceOrder() {
+        cartPage.deliveryPaymentSelect();
+    }
+
+    @Then("I take a screenshot of the order")
+    public void iTakeAScreenshotOfTheOrder() {
+        orderPage = new OrderPage(driver);
+        orderPage.createDirectoryIfNotExists("screenshots");
+        String fileName = "screenshots/order_" + System.currentTimeMillis() + ".png";
+        orderPage.takeAScreenshot(fileName);
     }
 }
 

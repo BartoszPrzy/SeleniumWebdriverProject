@@ -23,8 +23,6 @@ public class NewAddressPage {
     @FindBy(id = "field-phone")
     private WebElement phoneNumberInput;
 
-    @FindBy(xpath = "//button[contains(@class, 'btn-primary')]")
-    private WebElement saveButtonClick;
 
     public NewAddressPage(WebDriver driver) {
         this.driver = driver;
@@ -38,7 +36,5 @@ public class NewAddressPage {
         cityInput.sendKeys(city);
         postalCodeInput.sendKeys(postalCode);
         phoneNumberInput.sendKeys(phoneNumber);
-
-        saveButtonClick.click();
     }
 }

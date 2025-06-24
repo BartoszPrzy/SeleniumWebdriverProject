@@ -19,6 +19,9 @@ public class MyAddressesPage {
     @FindBy(className = "address-body")
     private WebElement addressContainer;
 
+    @FindBy(className = "alert-success")
+    private WebElement addressDeleteAlert;
+
     public MyAddressesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -32,5 +35,9 @@ public class MyAddressesPage {
     //get address list
     public String getLatestAddressText() {
         return addressContainer.getText();
+    }
+
+    public boolean isAddressAlertVisible() {
+        return addressDeleteAlert.isDisplayed();
     }
 }
