@@ -37,6 +37,7 @@ public class MyAddressesPage {
         return addressContainer.getText();
     }
 
+    //Checks whether the success alert for address deletion is visible
     public boolean isAddressAlertVisible() {
         return addressDeleteAlert.isDisplayed();
     }

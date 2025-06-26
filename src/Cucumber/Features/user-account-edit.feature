@@ -26,9 +26,9 @@ Feature: User account edit
     And I choose pay by Check
     And I place order
     Then I take a screenshot of the order
-#    And I go to order history and details
-#    And I check if the order has correct amount and status
-    #And I close the browser
+    And I go to order history and details
+    And I check if the order has correct amount and status
+    And I close the browser
     Examples:
       | alias | address       | city   | postal code | phone       | size | quantity |
       | Home1 | Aleja Łużycka | Poznań | 60-689      | 124-789-852 | L    | 5        |

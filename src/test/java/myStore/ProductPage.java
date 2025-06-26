@@ -41,12 +41,14 @@ public class ProductPage {
         Assertions.assertEquals(currPrice, expectedPrice);
     }
 
+    //Select size from examples table
     public void sizePick(String size) {
         Select sizeDropdown = new Select(sizeGroup);
         sizeDropdown.selectByVisibleText(size);
     }
 
-    public void selectQuantity (int quantity) {
+    //Select quantity from examples table
+    public void selectQuantity(int quantity) {
         int defaultValue = 1;
         int clicksNeeded = quantity - defaultValue;
         for (int i = 0; i < clicksNeeded; i++) {

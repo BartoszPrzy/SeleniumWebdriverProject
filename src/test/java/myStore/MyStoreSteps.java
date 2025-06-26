@@ -149,6 +149,7 @@ public class MyStoreSteps {
         Assertions.assertTrue(myAddressesPage.isAddressAlertVisible(), "The address was not successfully deleted");
     }
 
+
     @Then("^I enter new alias (.*) address (.*) city (.*) postal code (.*) phone (.*)$")
     public void iAddNewAddress(String alias, String address, String city, String postalCode, String phoneNumber) {
         this.alias = alias;
@@ -163,16 +164,17 @@ public class MyStoreSteps {
 
     @And("I choose pick up in-store")
     public void iChoosePickUpInStore() {
+        cartPage.deliveryBtn();
     }
 
     @And("I choose pay by Check")
     public void iChoosePayByCheck() {
-        cartPage.deliveryBtn();
+        cartPage.deliveryPaymentSelect();
     }
 
     @And("I place order")
     public void iPlaceOrder() {
-        cartPage.deliveryPaymentSelect();
+        driver.findElement(By.cssSelector("div>button[class$=center-block]")).click();
     }
 
     @Then("I take a screenshot of the order")
@@ -181,6 +183,25 @@ public class MyStoreSteps {
         orderPage.createDirectoryIfNotExists("screenshots");
         String fileName = "screenshots/order_" + System.currentTimeMillis() + ".png";
         orderPage.takeAScreenshot(fileName);
+    }
+
+    @And("I go to order history and details")
+    public void iGoToOrderHistoryAndDetails() {
+
+        orderPage.orderHistoryAndDetails();
+        Assertions.assertFalse(orderPage.isOrderAlertVisible(), "There is no orders");
+    }
+
+    @And("I check if the order has correct amount and status")
+    public void iCheckIfTheOrderHasCorrectAmountAndStatus() {
+        orderPage.orderAmountFromTheOrderStatus();
+        Assertions.assertEquals(cartPage.getPaymentAmount(), orderPage.getPaymentOrderAmount());
+        orderPage.isOrderWithStatusPresent("Awaiting check payment");
+    }
+
+    @And("I close the browser")
+    public void iCloseTheBrowser() {
+        driver.quit();
     }
 }
 

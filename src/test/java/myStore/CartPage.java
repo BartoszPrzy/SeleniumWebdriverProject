@@ -29,20 +29,26 @@ public class CartPage {
     @FindBy(css = "div[class$=\"cart-total\"]>span[class=value]")
     private WebElement paymentAmountText;
 
-    @FindBy(css = "div>button[class$=center-block]")
-    private WebElement paymentProceedBtn;
 
+    //Amount order getter
+    private double paymentAmount;
+
+    public double getPaymentAmount() {
+        return paymentAmount;
+    }
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
+    //Go to cart
     public void cartBtn() {
         addToCartBtn.click();
         checkoutCartBtn.click();
     }
 
+    //Check if correct delivery option is selected
     public void deliveryBtn() {
         if (!selfPickUpRadioBtn.isSelected()) {
             selfPickUpRadioBtn.click();
@@ -50,6 +56,7 @@ public class CartPage {
         deliveryContinueBtn.click();
     }
 
+    //Check if correct payment option is selected also terms and conditions
     public void deliveryPaymentSelect() {
         if (!payByCheckRadioBtn.isSelected()) {
             payByCheckRadioBtn.click();
@@ -57,11 +64,10 @@ public class CartPage {
         if (!termsAndConditionsSelectBtn.isSelected()) {
             termsAndConditionsSelectBtn.click();
         }
+        //Retrieves the order amount form cart
         String paymentAmountClean = paymentAmountText.getText().replaceAll("[^\\d.]", ""); //Removing unnecessary characters
-        double paymentAmount = Double.parseDouble(paymentAmountClean);
-        System.out.println(paymentAmount);
-
-        paymentProceedBtn.click();
+        paymentAmount = Double.parseDouble(paymentAmountClean);
+        System.out.println("Payment amount: " + paymentAmount);
 
     }
 
