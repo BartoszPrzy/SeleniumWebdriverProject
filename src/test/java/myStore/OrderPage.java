@@ -118,7 +118,6 @@ public class OrderPage {
     public void orderAmountFromTheOrderStatus() {
         String paymentOrderAmountText = orderFinalAmount.getText().replaceAll("[^\\d.]", ""); //Removing unnecessary characters
         paymentOrderAmount = Double.parseDouble(paymentOrderAmountText);
-        System.out.println(paymentOrderAmountText);
         System.out.println("Order amount: " + paymentOrderAmount);
     }
 }
