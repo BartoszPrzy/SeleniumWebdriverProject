@@ -5,6 +5,30 @@ Hello,
 my name is Bartosz, and this project is about my path in learning programming.
 <br>This is an end-to-end automated test project written in Java, covering everything from user creation to placing an order and verifying its status.
 
+## Getting Started
+### Prerequisites
+Make sure you have the following installed:
+* Java 24 (Oracle OpenJDK)
+* Maven 3.x
+* Google Chrome and a compatible ChromeDriver available in your system PATH
+
+### Installation
+1. Clone the repository:
+   https://github.com/BartoszPrzy/SeleniumWebdriverProject.git
+2. All required dependencies are listed in the pom.xml file. Maven will automatically download them on first run.
+
+To install dependencies manually (optional step):
+
+bash:
+mvn dependency:resolve
+Or simply proceed with the test run (Maven will resolve them during mvn test).
+
+##  How to Run the Test
+1. Move to a project directory
+   cd SeleniumWebdriverProject
+2. Run tests
+   mvn test
+
 ## Features
 * Creates a user by randomly selecting gender and corresponding data for the chosen gender
 * Creates an address using data provided in the examples table
