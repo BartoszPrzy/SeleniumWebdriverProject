@@ -1,4 +1,4 @@
-package myStore;
+package myStore.Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +32,6 @@ public class CartPage {
 
     //Amount order getter
     private double paymentAmount;
-
     public double getPaymentAmount() {
         return paymentAmount;
     }
@@ -43,13 +42,13 @@ public class CartPage {
     }
 
     //Go to cart
-    public void cartBtn() {
+    public void clickCartBtn() {
         addToCartBtn.click();
         checkoutCartBtn.click();
     }
 
     //Check if correct delivery option is selected
-    public void deliveryBtn() {
+    public void clickDeliveryBtn() {
         if (!selfPickUpRadioBtn.isSelected()) {
             selfPickUpRadioBtn.click();
         }
@@ -57,14 +56,14 @@ public class CartPage {
     }
 
     //Check if correct payment option is selected also terms and conditions
-    public void deliveryPaymentSelect() {
+    public void selectDeliveryAndPaymentByCheck() {
         if (!payByCheckRadioBtn.isSelected()) {
             payByCheckRadioBtn.click();
         }
         if (!termsAndConditionsSelectBtn.isSelected()) {
             termsAndConditionsSelectBtn.click();
         }
-        //Retrieves the order amount form cart
+        //Retrieves the order amount from cart
         String paymentAmountClean = paymentAmountText.getText().replaceAll("[^\\d.]", ""); //Removing unnecessary characters
         paymentAmount = Double.parseDouble(paymentAmountClean);
         System.out.println("Payment amount: " + paymentAmount);

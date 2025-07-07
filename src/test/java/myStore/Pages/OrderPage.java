@@ -1,4 +1,4 @@
-package myStore;
+package myStore.Pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.io.FileHandler;
@@ -95,7 +95,7 @@ public class OrderPage {
     }
 
     //Order history and Details tile
-    public void orderHistoryAndDetails() {
+    public void clickOrderHistoryAndDetails() {
         accountBtn.click();
         orderHistoryBtn.click();
 

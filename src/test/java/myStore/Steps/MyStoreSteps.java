@@ -1,9 +1,10 @@
-package myStore;
+package myStore.Steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import myStore.Pages.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -130,7 +131,7 @@ public class MyStoreSteps {
     @Then("I add it to the cart")
     public void iAddItToTheCart() {
         cartPage = new CartPage(driver);
-        cartPage.cartBtn();
+        cartPage.clickCartBtn();
     }
 
     @And("I click on proceed to checkout")
@@ -164,12 +165,12 @@ public class MyStoreSteps {
 
     @And("I choose pick up in-store")
     public void iChoosePickUpInStore() {
-        cartPage.deliveryBtn();
+        cartPage.clickDeliveryBtn();
     }
 
     @And("I choose pay by Check")
     public void iChoosePayByCheck() {
-        cartPage.deliveryPaymentSelect();
+        cartPage.selectDeliveryAndPaymentByCheck();
     }
 
     @And("I place order")
@@ -188,7 +189,7 @@ public class MyStoreSteps {
     @And("I go to order history and details")
     public void iGoToOrderHistoryAndDetails() {
 
-        orderPage.orderHistoryAndDetails();
+        orderPage.clickOrderHistoryAndDetails();
         Assertions.assertFalse(orderPage.isOrderAlertVisible(), "There is no orders");
     }
 

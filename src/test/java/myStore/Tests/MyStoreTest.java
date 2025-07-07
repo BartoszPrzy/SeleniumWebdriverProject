@@ -1,4 +1,4 @@
-package myStore;
+package myStore.Tests;
 
 import org.junit.platform.suite.api.*;
 
