@@ -17,17 +17,17 @@ Make sure you have the following installed:
    https://github.com/BartoszPrzy/SeleniumWebdriverProject.git
 2. All required dependencies are listed in the pom.xml file. Maven will automatically download them on first run.
 
-To install dependencies manually (optional step):
+<br>To install dependencies manually (optional step):
 
 bash:
 mvn dependency:resolve
-Or simply proceed with the test run (Maven will resolve them during mvn test).
+<br>Or simply proceed with the test run (Maven will resolve them during mvn test).
 
 ##  How to Run the Test
 1. Move to a project directory
-   cd SeleniumWebdriverProject
+   <br>cd SeleniumWebdriverProject
 2. Run tests
-   mvn test
+  <br>mvn test
 
 ## Features
 * Creates a user by randomly selecting gender and corresponding data for the chosen gender
